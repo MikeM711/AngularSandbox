@@ -5,8 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+// imports & component decorator stuff
 export class HomeComponent implements OnInit {
-
+  homeTitle = "Welcome to the SICK directory..."
   constructor() { }
 
   ngOnInit() {
