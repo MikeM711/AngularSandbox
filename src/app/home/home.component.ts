@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 // imports & component decorator stuff
 export class HomeComponent implements OnInit {
   homeTitle = "Welcome to the SICK directory..."
+  
+  ninja = {
+    name:"Yoshi",
+    belt:"Black"
+  }
+
   constructor() { }
 
   ngOnInit() {
