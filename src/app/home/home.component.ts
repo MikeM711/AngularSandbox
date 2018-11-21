@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 // imports & component decorator stuff
 export class HomeComponent implements OnInit {
-  homeTitle = "Welcome to the SICK directory..."
-  
-  ninja = {
-    name:"Yoshi",
-    belt:"Black"
-  }
+  homeTitle = "Welcome to the SICK directory...";
+
+  @Input() ninjaProperty;
 
   constructor() { }
 
