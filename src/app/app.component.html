@@ -9,5 +9,5 @@
 </header>
 
 <section id="main">
-  <app-home [ninjaProperty]="ninja">Hello World! </app-home>
+  <app-home [ninjaProperty]="ninja" (onYell)="yell($event)" >Hello World! </app-home>
 </section>
