@@ -2,12 +2,16 @@
   <h1>{{title}}</h1>
   <nav>
     <ul>
-      <li>link</li>
-      <li>link</li>
+      <li> <a [routerLink]="['']">Home</a> </li>
+      <li> <a [routerLink]="['directory']">Directory</a> </li>
     </ul>
   </nav>
 </header>
 
 <section id="main">
+  <!--
   <app-home [ninjaProperty]="ninja" (onYell)="yell($event)" >Hello World! </app-home>
+  -->
+  <router-outlet></router-outlet>
 </section>
+
