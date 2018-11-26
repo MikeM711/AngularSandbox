@@ -1,11 +1,15 @@
-<p [ngClass]="classes">
-  directory works!
-</p>
-
-<p *ngIf="test">Only show if test is true</p>
-
-<style>
-    .blue{color: blue;}
-    .red{color: red;}
-    .underline{text-decoration: underline;}
-</style>
+<h2>Ninja Listing</h2>
+<form id="filter">
+  <label>Filter ninjas by name</label>
+  <input type="text" [(ngModel)]="term" name="term" />
+</form>
+<ul id="ninja-listing">
+  <li *ngFor="let ninja of ninjas | filter:term">
+    <div class="single-ninja">
+      <!-- Belt Color -->
+      <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
+      <!-- Ninja Name-->
+      <h3>{{ninja.name}}</h3>
+    </div>
+  </li>
+</ul>

@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+//import { FilterPipe} from '../filter.pipe';
 
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.component.html',
-  styleUrls: ['./directory.component.css']
+  styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
-  // Toggle true/false to change instructions for our directives
-  classes = {'blue': false, 'red': false, 'underline': true};
-  test = true;
+  ninjas = [
+    {name: "Yoshi", belt: "Black"},
+    {name: "Ryu", belt: "Red"},
+    {name: "Crystal", belt: "Purple"},
+  ];
+
   constructor() { 
   }
   ngOnInit() {

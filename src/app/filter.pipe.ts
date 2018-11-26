@@ -1,0 +1,20 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
+
+  transform(ninjas: any, term: any): any {
+    // check if search term is undefined
+    // if it is undefined, we will return all of the ninjas
+    if (term === undefined) return ninjas;
+    // otherwise - return updated ninjas array
+
+    return ninjas.filter(function(ninja){
+      return ninja.name.toLowerCase().includes(term.toLowerCase());
+    })
+
+  }
+
+}
