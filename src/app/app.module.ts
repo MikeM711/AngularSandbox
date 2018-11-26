@@ -9,6 +9,8 @@ import { FormsModule }   from '@angular/forms';
 import { DirectoryComponent } from './directory/directory.component';
 import { FilterPipe } from './filter.pipe';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,7 @@ import { FilterPipe } from './filter.pipe';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule
   ],
