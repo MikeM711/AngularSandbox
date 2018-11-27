@@ -9,6 +9,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   fetchData(){
-    return this.http.get('/assets/ninjas.json')
+    return this.http.get('https://nn-angular-2cb48.firebaseio.com/.json')
   };
 }
