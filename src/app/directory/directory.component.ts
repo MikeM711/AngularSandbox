@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
-  ninjas = [];
+  ninjas:any = [];
   bool = null;
 
   constructor(private logger: LoggingService, private dataService: DataService) { }
@@ -20,7 +20,7 @@ export class DirectoryComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.fetchData().subscribe(
-      (data) => console.log(data)
+      (data) => this.ninjas = data
     )};
 
 }
