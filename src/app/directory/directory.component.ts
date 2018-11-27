@@ -9,8 +9,8 @@ import { DataService } from '../data.service';
   styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
-  //ninjas = [];
-  //bool = null;
+  ninjas = [];
+  bool = null;
 
   constructor(private logger: LoggingService, private dataService: DataService) { }
 
@@ -19,7 +19,8 @@ export class DirectoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.fetchData();
-  }
+    this.dataService.fetchData().subscribe(
+      (data) => console.log(data)
+    )};
 
 }
