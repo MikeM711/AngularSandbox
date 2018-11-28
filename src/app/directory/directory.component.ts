@@ -28,7 +28,8 @@ export class DirectoryComponent implements OnInit {
     /*this.dataService.fetchData().subscribe(
       (data) => this.ninjas = data
     );*/
-    this.fbGetData(); 
+    this.fbGetData();
+    this.fbUpdateData(); 
   }
 
   fbGetData(){
@@ -36,6 +37,14 @@ export class DirectoryComponent implements OnInit {
       this.ninjas.push(snapshot.val());
       //console.log(snapshot.val())
       this.lastNinja = snapshot
+    })
+  }
+
+  fbUpdateData(){
+    firebase.database().ref().on('child_removed', (oldChildSnapshot) => {
+      //this.ninjas.push(oldChildSnapshot.val());
+      console.log(oldChildSnapshot.val())
+      this.ninjas.pop();
     })
   }
 
@@ -48,7 +57,7 @@ export class DirectoryComponent implements OnInit {
   fbDeleteData() {
     // console.log(this.lastNinja.key)
     firebase.database().ref('/').child(this.lastNinja.key).remove();
-    
+ 
   }
   
 }
