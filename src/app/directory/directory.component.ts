@@ -37,4 +37,19 @@ export class DirectoryComponent implements OnInit {
   fbPostData(name, belt){
     firebase.database().ref('/').push({name: name, belt: belt});
   }
+
+  // The function below (hooked up to the button) will remove everything in the Database
+  
+  fbDeleteData() {
+    var adaRef = firebase.database().ref('/');
+    adaRef.remove()
+      .then(function () {
+        console.log("Remove succeeded.")
+      })
+      .catch(function (error) {
+        console.log("Remove failed: " + error.message)
+      });
+
+  }
+  
 }

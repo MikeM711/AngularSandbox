@@ -144,3 +144,30 @@ body{
     cursor: pointer;
     float: right;
   }
+
+  #delete-ninja{
+    margin-top: 30px;
+    background: #e7e7e7;
+    padding: 10px;
+    border-radius: 2px;
+  }
+  
+  #delete-ninja input{
+    display: inline-block;
+    padding: 10px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    width: 240px;
+  }
+  
+  #delete-ninja button{
+    background: red;
+    color: #eee;
+    padding: 8px 10px;
+    border: 0;
+    borader-radius: 2px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    float: right;
+  }

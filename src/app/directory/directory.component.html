@@ -21,3 +21,11 @@
   <input type="text" [(ngModel)]="belt" [ngModelOptions]="{standalone: true}"/>
   <button (click)="fbPostData(name, belt)">Add Ninja</button>
 </form>
+
+<form id="delete-ninja">
+  <!-- Below input tags don't do anything yet -->
+  <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"/>
+  <input type="text" [(ngModel)]="belt" [ngModelOptions]="{standalone: true}"/>
+  <!-- Functional Button -->
+  <button (click)="fbDeleteData()" >Delete Ninja</button>
+</form>
