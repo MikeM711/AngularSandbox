@@ -13,6 +13,9 @@ export class DirectoryComponent implements OnInit {
   ninjas:any = [];
   bool = null;
 
+  // lastNinja is just the snapshot
+  lastNinja:any;
+
   constructor(private logger: LoggingService, private dataService: DataService) { }
 
   logIt(){
@@ -29,8 +32,10 @@ export class DirectoryComponent implements OnInit {
   }
 
   fbGetData(){
-    firebase.database().ref('/').on('child_added', (snapshot) => {
-      this.ninjas.push(snapshot.val())
+    firebase.database().ref().on('child_added', (snapshot) => {
+      this.ninjas.push(snapshot.val());
+      //console.log(snapshot.val())
+      this.lastNinja = snapshot
     })
   }
 
@@ -38,18 +43,12 @@ export class DirectoryComponent implements OnInit {
     firebase.database().ref('/').push({name: name, belt: belt});
   }
 
-  // The function below (hooked up to the button) will remove everything in the Database
+  // The function below (hooked up to the button) will delete the last ninja in the Database
   
   fbDeleteData() {
-    var adaRef = firebase.database().ref('/');
-    adaRef.remove()
-      .then(function () {
-        console.log("Remove succeeded.")
-      })
-      .catch(function (error) {
-        console.log("Remove failed: " + error.message)
-      });
-
+    // console.log(this.lastNinja.key)
+    firebase.database().ref('/').child(this.lastNinja.key).remove();
+    
   }
   
 }
