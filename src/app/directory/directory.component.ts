@@ -10,11 +10,13 @@ declare var firebase: any;
   styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
-  ninjas:any = [];
+  ninjas:any =[];
+  updatedNinjas:any = [];
+  keyDelete: any;
   bool = null;
 
   // lastNinja is just the snapshot
-  lastNinja:any;
+  // lastNinja:any;
 
   constructor(private logger: LoggingService, private dataService: DataService) { }
 
@@ -32,32 +34,69 @@ export class DirectoryComponent implements OnInit {
     this.fbUpdateData(); 
   }
 
+  // Below updates web app AFTER name and belt data are added to Database
   fbGetData(){
     firebase.database().ref().on('child_added', (snapshot) => {
-      this.ninjas.push(snapshot.val());
-      //console.log(snapshot.val())
-      this.lastNinja = snapshot
+      //ninja array now takes in database values [0] and keys [1]
+      this.ninjas.push([snapshot.val(), snapshot.key]);
+      //console.log(this.ninjas, "here is this.ninjas")
+      // this.lastNinja = snapshot
     })
   }
 
   fbUpdateData(){
     firebase.database().ref().on('child_removed', (oldChildSnapshot) => {
-      //this.ninjas.push(oldChildSnapshot.val());
-      console.log(oldChildSnapshot.val())
-      this.ninjas.pop();
+      // Below shows that the database knows a child has been removed with a snapshot of the particular child removal
+      // console.log(oldChildSnapshot.key, 'child removed listener result')
+
+      // iterating through ninjas array to find where the key is, and skip over it
+      for(let i=0; i < this.ninjas.length; i++){
+        if(this.ninjas[i][1] !== oldChildSnapshot.key){
+          // console.log(this.ninjas[i], 'this.ninjas') - Ninja Keys
+          this.updatedNinjas.push(this.ninjas[i])
+        }
+      }
+      // setting the old array equal to the array with the item we "skipped over"
+      this.ninjas = this.updatedNinjas;
+      // console.log(this.ninjas, 'The new list!')
+      // this.ninjas.pop(); // pops last ninja out of array
+
     })
   }
 
+  // Below pushes name and belt data into the Database
   fbPostData(name, belt){
     firebase.database().ref('/').push({name: name, belt: belt});
   }
 
   // The function below (hooked up to the button) will delete the last ninja in the Database
-  
-  fbDeleteData() {
-    // console.log(this.lastNinja.key)
-    firebase.database().ref('/').child(this.lastNinja.key).remove();
- 
+  fbDeleteData(nameDelete, beltDelete) {
+
+    // Below is the user's name/belt delete request
+    // console.log(nameDelete)
+    // console.log(beltDelete)
+
+    // setting everything to lowercase - therefore, no case-sensitivity
+    nameDelete = nameDelete.toString().toLowerCase()
+    beltDelete = beltDelete.toString().toLowerCase()
+
+    // Function finds the database key in question that it must delete
+    this.keyDelete = this.deleteKey(nameDelete, beltDelete);
+    //console.log(this.keyDelete);
+
+    // remove the child from the database
+    firebase.database().ref('/').child(this.keyDelete).remove();
+
   }
+
+  // deleteKey function goes in tandem with fbDeleteData
+  // iterates through ninjas array to find the key related to the ninja/belt the user want to delete
+  deleteKey = function(nameDelete, beltDelete){
+    for(let i=0; i < this.ninjas.length; i++){
+        if(this.ninjas[i][0].name == nameDelete && this.ninjas[i][0].belt == beltDelete){
+            return this.ninjas[i][1] 
+        }
+    }  
+}
   
 }

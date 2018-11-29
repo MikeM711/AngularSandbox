@@ -7,9 +7,9 @@
   <li *ngFor="let ninja of ninjas | filter:term">
     <div class="single-ninja">
       <!-- Belt Color -->
-      <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
+      <span [ngStyle]="{background: ninja[0].belt}">{{ninja[0].belt}} belt</span>
       <!-- Ninja Name-->
-      <h3>{{ninja.name}}</h3>
+      <h3>{{ninja[0].name}}</h3>
     </div>
   </li>
 </ul>
@@ -24,8 +24,8 @@
 
 <form id="delete-ninja">
   <!-- Below input tags don't do anything yet -->
-  <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"/>
-  <input type="text" [(ngModel)]="belt" [ngModelOptions]="{standalone: true}"/>
+  <input type="text" [(ngModel)]="nameDelete" [ngModelOptions]="{standalone: true}"/>
+  <input type="text" [(ngModel)]="beltDelete" [ngModelOptions]="{standalone: true}"/>
   <!-- Functional Button -->
-  <button (click)="fbDeleteData()" >Delete Ninja</button>
+  <button (click)="fbDeleteData(nameDelete, beltDelete)" >Delete Ninja</button>
 </form>
