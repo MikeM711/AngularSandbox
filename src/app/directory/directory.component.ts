@@ -63,6 +63,12 @@ export class DirectoryComponent implements OnInit {
       }
       // setting the old array equal to the array with the item we "skipped over"
       this.ninjas = this.updatedNinjas;
+
+      // Dump out the updatedNinjas array to use for next time
+      this.updatedNinjas = {
+        DB: [],
+        Key: [],
+      }
       // console.log(this.ninjas, 'The new list!')
       // this.ninjas.pop(); // pops last ninja out of array
 
