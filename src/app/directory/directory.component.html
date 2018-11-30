@@ -4,12 +4,12 @@
   <input type="text" [(ngModel)]="term" name="term" />
 </form>
 <ul id="ninja-listing">
-  <li *ngFor="let ninja of ninjas | filter:term">
+  <li *ngFor="let ninja of ninjas.DB | filter:term">
     <div class="single-ninja">
       <!-- Belt Color -->
-      <span [ngStyle]="{background: ninja[0].belt}">{{ninja[0].belt}} belt</span>
+      <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
       <!-- Ninja Name-->
-      <h3>{{ninja[0].name}}</h3>
+      <h3>{{ninja.name}}</h3>
     </div>
   </li>
 </ul>

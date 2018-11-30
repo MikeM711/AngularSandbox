@@ -10,11 +10,17 @@ declare var firebase: any;
   styleUrls: ['./directory.component.css'],
 })
 export class DirectoryComponent implements OnInit {
-  ninjas:any =[];
-  updatedNinjas:any = [];
+  ninjas = {
+    DB: [],
+    Key: [],
+  }
+  updatedNinjas = {
+    DB: [],
+    Key: [],
+  }
   keyDelete: any;
   bool = null;
-
+  
   // lastNinja is just the snapshot
   // lastNinja:any;
 
@@ -37,10 +43,8 @@ export class DirectoryComponent implements OnInit {
   // Below updates web app AFTER name and belt data are added to Database
   fbGetData(){
     firebase.database().ref().on('child_added', (snapshot) => {
-      //ninja array now takes in database values [0] and keys [1]
-      this.ninjas.push([snapshot.val(), snapshot.key]);
-      //console.log(this.ninjas, "here is this.ninjas")
-      // this.lastNinja = snapshot
+      this.ninjas.DB.push(snapshot.val())
+      this.ninjas.Key.push(snapshot.key)
     })
   }
 
@@ -50,10 +54,11 @@ export class DirectoryComponent implements OnInit {
       // console.log(oldChildSnapshot.key, 'child removed listener result')
 
       // iterating through ninjas array to find where the key is, and skip over it
-      for(let i=0; i < this.ninjas.length; i++){
-        if(this.ninjas[i][1] !== oldChildSnapshot.key){
+      for(let i=0; i < this.ninjas.DB.length; i++){
+        if(this.ninjas.Key[i] !== oldChildSnapshot.key){
           // console.log(this.ninjas[i], 'this.ninjas') - Ninja Keys
-          this.updatedNinjas.push(this.ninjas[i])
+          this.updatedNinjas.DB.push(this.ninjas.DB[i])
+          this.updatedNinjas.Key.push(this.ninjas.Key[i])
         }
       }
       // setting the old array equal to the array with the item we "skipped over"
@@ -69,7 +74,7 @@ export class DirectoryComponent implements OnInit {
     firebase.database().ref('/').push({name: name, belt: belt});
   }
 
-  // The function below (hooked up to the button) will delete the last ninja in the Database
+  // The function below (hooked up to the button) will delete any ninja in the Database
   fbDeleteData(nameDelete, beltDelete) {
 
     // Below is the user's name/belt delete request
@@ -91,12 +96,12 @@ export class DirectoryComponent implements OnInit {
 
   // deleteKey function goes in tandem with fbDeleteData
   // iterates through ninjas array to find the key related to the ninja/belt the user want to delete
-  deleteKey = function(nameDelete, beltDelete){
-    for(let i=0; i < this.ninjas.length; i++){
-        if(this.ninjas[i][0].name == nameDelete && this.ninjas[i][0].belt == beltDelete){
-            return this.ninjas[i][1] 
-        }
-    }  
-}
+  deleteKey = function (nameDelete, beltDelete) {
+    for (let i = 0; i < this.ninjas.DB.length; i++) {
+      if (this.ninjas.DB[i].name == nameDelete && this.ninjas.DB[i].belt == beltDelete) {
+        return this.ninjas.Key[i]
+      }
+    }
+  }
   
 }
