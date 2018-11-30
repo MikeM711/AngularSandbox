@@ -21,6 +21,11 @@ export class DirectoryComponent implements OnInit {
   keyDelete: any;
   bool = null;
   
+  name: any;
+  belt: any;
+  nameDelete: any;
+  beltDelete: any;
+
   // lastNinja is just the snapshot
   // lastNinja:any;
 
@@ -37,7 +42,7 @@ export class DirectoryComponent implements OnInit {
       (data) => this.ninjas = data
     );*/
     this.fbGetData();
-    this.fbUpdateData(); 
+    this.fbUpdateData();
   }
 
   // Below updates web app AFTER name and belt data are added to Database
@@ -45,6 +50,9 @@ export class DirectoryComponent implements OnInit {
     firebase.database().ref().on('child_added', (snapshot) => {
       this.ninjas.DB.push(snapshot.val())
       this.ninjas.Key.push(snapshot.key)
+
+      this.name = null;
+      this.belt = null;
     })
   }
 
@@ -71,7 +79,8 @@ export class DirectoryComponent implements OnInit {
       }
       // console.log(this.ninjas, 'The new list!')
       // this.ninjas.pop(); // pops last ninja out of array
-
+      this.nameDelete = null;
+      this.beltDelete = null;
     })
   }
 
@@ -104,10 +113,10 @@ export class DirectoryComponent implements OnInit {
   // iterates through ninjas array to find the key related to the ninja/belt the user want to delete
   deleteKey = function (nameDelete, beltDelete) {
     for (let i = 0; i < this.ninjas.DB.length; i++) {
-      if (this.ninjas.DB[i].name == nameDelete && this.ninjas.DB[i].belt == beltDelete) {
+      if (this.ninjas.DB[i].name.toLowerCase() == nameDelete && this.ninjas.DB[i].belt.toLowerCase() == beltDelete) {
         return this.ninjas.Key[i]
       }
     }
   }
-  
+
 }

@@ -10,6 +10,7 @@
       <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
       <!-- Ninja Name-->
       <h3>{{ninja.name}}</h3>
+      <button (click)="fbDeleteData(ninja.name, ninja.belt)"></button>
     </div>
   </li>
 </ul>
@@ -17,14 +18,17 @@
 <!-- <button (click)="logIt()">Log Me!</button> -->
 
 <form id="add-ninja">
-  <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"/>
+<span>Ninja:</span>
+  <input type="text"  [(ngModel)]="name" [ngModelOptions]="{standalone: true}"/>
+  <span>Belt:</span>
   <input type="text" [(ngModel)]="belt" [ngModelOptions]="{standalone: true}"/>
   <button (click)="fbPostData(name, belt)">Add Ninja</button>
 </form>
 
 <form id="delete-ninja">
-  <!-- Below input tags don't do anything yet -->
+<span>Ninja:</span>
   <input type="text" [(ngModel)]="nameDelete" [ngModelOptions]="{standalone: true}"/>
+  <span>Belt:</span>
   <input type="text" [(ngModel)]="beltDelete" [ngModelOptions]="{standalone: true}"/>
   <!-- Functional Button -->
   <button (click)="fbDeleteData(nameDelete, beltDelete)" >Delete Ninja</button>

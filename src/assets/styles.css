@@ -5,7 +5,7 @@ body{
     letter-spacing: 0.1em;
     color: #606060;
     background: #eee;
-    padding: 20px;
+     padding: 20px;
   }
   
   h1,h2,h3{
@@ -128,17 +128,25 @@ body{
   #add-ninja input{
     display: inline-block;
     padding: 10px;
+    padding-right: 10px;
     border-radius: 2px;
     border: 1px solid #ddd;
-    width: 240px;
+    width: 20%;
+  }
+
+  #add-ninja span{
+    display: inline-block;
+    padding: 10px;
+    padding-right: 10px;
   }
   
   #add-ninja button{
     background: #0288d1;
     color: #eee;
-    padding: 8px 10px;
+    padding: 10px 10px;
+    margin: 2px;
     border: 0;
-    borader-radius: 2px;
+    border-radius: 2px;
     font-size: 16px;
     letter-spacing: 1px;
     cursor: pointer;
@@ -155,19 +163,27 @@ body{
   #delete-ninja input{
     display: inline-block;
     padding: 10px;
+    padding-right: 10px;
     border-radius: 2px;
     border: 1px solid #ddd;
-    width: 240px;
+    width: 20%;
   }
   
   #delete-ninja button{
     background: red;
     color: #eee;
     padding: 8px 10px;
+    margin: 2px;
     border: 0;
-    borader-radius: 2px;
+    border-radius: 2px;
     font-size: 16px;
     letter-spacing: 1px;
     cursor: pointer;
     float: right;
+  }
+
+  #delete-ninja span{
+    display: inline-block;
+    padding: 10px;
+    padding-right: 10px;
   }
